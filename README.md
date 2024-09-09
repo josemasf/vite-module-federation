@@ -1,6 +1,6 @@
 ## Crear remote app
 
-con la ayuda de vite crear una app a partir de una plantilla 
+Con la ayuda de vite crear una app a partir de una plantilla 
 
 `
 pnpm create vite remote --template vue
@@ -247,3 +247,5 @@ button {
 </style>
 
 ```
+
+Basado en [Vite and Module Federation Makes Micro-Frontends EASY!](https://www.youtube.com/watch?v=t-nchkL9yIg)
