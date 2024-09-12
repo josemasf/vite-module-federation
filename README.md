@@ -1,16 +1,30 @@
 ## Crear remote app
 
-Con la ayuda de vite crear una app a partir de una plantilla 
+Con la ayuda de Vite, crear una app a partir de una plantilla:
 
 `
 pnpm create vite remote --template vue
 `
 
-instalamos el plugin para vite de module federation
+Instalamos el plugin para Vite de module federation:
 
 `
 pnpm add @originjs/vite-plugin-federation -D -E
 `
+
+Configurar para que la aplicación siempre se sirva por el mismo puerto:
+
+
+```
+///package.json
+...
+ "scripts": {
+    "dev": "vite --port 3001 --strictPort",
+    "build": "vite build",
+    "preview": "vite preview --port 3001 --strictPort"
+  },
+...
+```
 
 ## crear un componente Button y usarlo App.vue
 
@@ -35,7 +49,7 @@ button {
 
 ```
 
-Así sería app.vue
+Así sería App.vue:
 
 ```
 <script setup>
@@ -55,7 +69,7 @@ import Button from './components/Button.vue';
 pnpm create vite host --template vue
 `
 
-instalamos el plugin para vite de module federation
+instalamos el plugin para Vite de module federation:
 
 `
 pnpm add @originjs/vite-plugin-federation -D -E
@@ -63,9 +77,9 @@ pnpm add @originjs/vite-plugin-federation -D -E
 
 ## Copias el botón y el composable
 
-Copiamos los archivos del botón y el composable en la app host
+Copiamos los archivos del botón y el composable a la app host.
 
-## Cambiamos el app.vue del host
+## Cambiamos el App.vue del host
 
 ```
 <script setup>
@@ -87,7 +101,6 @@ body {
 ## Configuramos el plugin en el remoto
 
 En el archivo vite.config
-
 
 ```
 import federation from '@originjs/vite-plugin-federation'
@@ -116,17 +129,7 @@ export default defineConfig({
 
 ## Preparamos el build
 
-en el archivo vite.config
-
-añadimos
-
-build:{
-    modulePreload: false,
-    target: 'esnext',
-    minify: false,
-    cssCodeSplit: false,
-  }
-
+En el archivo vite.config, añadimos configuración para el build:
 ```
 import federation from '@originjs/vite-plugin-federation'
 export default defineConfig({
@@ -154,7 +157,8 @@ export default defineConfig({
 
 ## Build and preview
 
-Exponemos nuestro remoto
+Exponemos nuestro remoto:
+
 
 `pnpm build`
 `pnpm preview`
@@ -176,9 +180,23 @@ export default defineConfig({
 })
 ```
 
+## Actualizamos App.vue en el remoto
+
+```
+<script setup>
+import Button from './components/Button.vue';
+</script>
+
+<template>
+  <h1>Remote</h1>
+  <Button />
+</template>
+```
+
+
 ## Cambiamos el color del botón del remote
 
-Usaremos estos estilos
+Usaremos estos estilos:
 
 ```
 <style scoped>
@@ -194,9 +212,10 @@ button {
 
 Build + preview para que se aplique el cambio
 
-## Exportando le composable
+## Exportando el composable
 
-Actualizamos nuestra configuración de vite
+Actualizamos nuestra configuración de Vite:
+
 
 ```
 export default defineConfig({
@@ -223,7 +242,7 @@ export default defineConfig({
 })
 ```
 
-Comentamos el composable local en host y usamos el composable compartido por el remoto
+Comentamos el composable local en el host y usamos el composable compartido por el remoto:
 
 ```
 
